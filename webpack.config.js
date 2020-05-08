@@ -2,12 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 process.env.NODE_ENV = 'development';
 
 module.exports = {
   entry: './src/index.js',
-
   output: {
     filename: 'built.js',
     path: path.resolve(__dirname, './build'),
@@ -153,17 +151,8 @@ module.exports = {
       filename: 'main.css'
     }),
     new OptimizeCssAssetsWebpackPlugin(),
-    new WorkboxWebpackPlugin.GenerateSW({
-      /**
-       * 1. 帮助serviceWorker快速启动
-       * 2. 删除旧的 serviceWorker
-       * 生成一个serviceWorker配置文件
-       */
-      clientsClaim: true,
-      skipWaiting: true,
-    })
   ],
-  mode: 'development', //development  production
+  mode: 'development', // development  production
   // 开发服务器devServer 只会在内存中打包编译
   // 不会有任何的输出, 启动指令是npx webpack-dev-server
   devServer: {
